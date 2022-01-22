@@ -1,73 +1,99 @@
+# Deploying a Spring Boot project 
 
-# Deploying a Spring Boot app on Heroku
+The following shows how to deploy a Spring Boot project with React using PostgreSQL database
+* The backend will be deployed on Heroku using PostgreSQL database
+* The frontend will be deployed on Vercel
 
+## Backend deployment
+### Heroku account
+* Create a Heroku account [Heroku’s SignUp Page](https://signup.heroku.com/)
+* Login using your email and password
 
-The following steps show how to deploy your project using Git and Heroku CLI.
-### You must have a Heroku account
-* Create a Heroku account [Heroku’s Signup Page](https://signup.heroku.com/)
+### Set up heroku app
+* from the home page create new app 
+<img src="images/1.jpg" width="80%">
+* Insert app name (must be unique)
+<img src="images/2.jpg" width="80%">
+* Select resource then find more add-ons to add Heroku postgres
+<img src="images/3.jpg" width="80%">
+<img src="images/4.jpg" width="80%">
+* Open database credentials as shown bellow
+<img src="images/5.jpg" width="80%">
+<img src="images/6.jpg" width="80%">
+<img src="images/7.jpg" width="80%">
+<img src="images/8.jpg" width="80%">
 
-### Download Heroku CLI from the Heroku Dev Center: 
-* [Heroku Dev Center](https://devcenter.heroku.com/articles/heroku-cli#download-and-install). Heroku CLI is a command line application that allows you to create, publish and manage Heroku applications from the command line.
-
-### Login using your email and password
-```
-heroku login
-```
-You will be prompted to enter your Heroku account’s email and password. After login, you can proceed with the deployment.
+We will use these credentials to configure our app
 
 ### Set up your project before deployment
 
-* Add this plugin to your pom.xml file
+* Modify your application proprieties file by adding the new database credentials 
 
 ```
-<plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-compiler-plugin</artifactId>
-	<version>3.1</version>
-	<configuration>
-		<source>1.7</source>
-		<target>1.7</target>
-	</configuration>
-</plugin>
+spring.datasource.url=jdbc:postgresql://<Host>/<Database>
+#change username
+spring.datasource.username=<User>
+#change password
+spring.datasource.password=<Password>
+spring.jpa.show-sql=false
+spring.jpa.hibernate.ddl-auto=update
+#change this line
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
+spring.jpa.properties.hibernate.format_sql=true
+server.port=${PORT:8080}
+```
+
+* Update your pom.xml file 
+
+  * Remove mysql dependency and add postgresql dependency
+```
+  <dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+	</dependency>
+```
+
+  * Add this plugin
+```
+    <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+		</plugin>
 ```
 
 * Make sure to target the correct Java runtime environment.
 
-* Then you should create an application.properties file in your project if you're targeting a runtime environment other than Heroku's default JDK 1.8 runtime environment. You can do this by specifying your desired java runtime environment like such:
-application.properties:
-```
-java.runtime.version=11 #change your version here
-```
+### Push your project to github and connect heroku with your project repo 
+* connect heroku to your repo
 
-### Set up Git and create a Heroku app
+* deploy the main branch
 
-* Create a local Git repository for the project
+## Frontend deployment
+### Deploy frontend on Vercel
 
-Run the following commands from the root directory of your project.
-```
-git init
-git add .
-git commit -m "deployment"
-```
-* Then, create a new Heroku app using this command:
-```
-heroku create <YOUR_PROJECT_NAME>
-```
-Note: app name must be unique.
+* Before push your work to github change all requests from <http://localhost:8080/> to <https://herokuAppName.herokuapp.com/>
 
-### Deploy the app to Heroku
-* In this step, you can deploy your project by pushing the code to the remote repository named heroku which was created by the heroku create command.
-```
-git push heroku master
-```
-* The deployment will take some time. You should see the build logs on your terminal. Once your project is deployed, you can open it using this command
-```
-heroku open
-```
-  
-* The app should open in the system’s default browser.
+* Push frontend to a new repo 
 
-* Finally, you can see the logs of your project anytime by running
+### Vercel account
+* Create a vercel account [Vercel’s Signup Page](https://vercel.com/signup)
+* Login using your email and password
+
+### Connect vercel with your frontend repo 
+
+* Connect vercel to your frontend repo then, in the project configuration add a new environment variable with this value
 ```
-heroku logs --tail
+CI = false 
 ```
+<img src="images/9.png" width="80%">
+
+* Deploy the project 
+
+Here we are done! You can now view your project and test all requests. 
