@@ -74,9 +74,9 @@ server.port=${PORT:8080}
 * Make sure to target the correct Java runtime environment.
 
 ### Push your project to github and connect heroku with your project repo 
-* connect heroku to your repo
+* Connect heroku to your repo
 
-* deploy the main branch
+* Deploy the main branch
 
 ## Frontend deployment
 ### Deploy frontend on Vercel
