@@ -48,24 +48,24 @@ server.port=${PORT:8080}
 
   * Remove mysql dependency and add postgresql dependency
 ```
-  <dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
+  	<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<scope>runtime</scope>
 	</dependency>
 ```
 
   * Add this plugin
 ```
-    <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-		</plugin>
+    	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<version>3.1</version>
+		<configuration>
+			<source>1.8</source>
+			<target>1.8</target>
+		</configuration>
+	</plugin>
 ```
 
 * Make sure to target the correct Java runtime environment.
@@ -92,7 +92,7 @@ server.port=${PORT:8080}
 ```
 CI = false 
 ```
-<img src="images/9.png" width="80%">
+<img src="images/9.jpg" width="80%">
 
 * Deploy the project 
 
