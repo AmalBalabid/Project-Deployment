@@ -6,7 +6,7 @@ The following shows how to deploy a Spring Boot project with React using Postgre
 
 ## Backend deployment
 ### Heroku account
-* Create a Heroku account [Heroku’s SignUp Page](https://signup.heroku.com/)
+* Create a Heroku account [Heroku’s Signup Page](https://signup.heroku.com/)
 * Login using your email and password
 
 ### Set up heroku app
@@ -51,24 +51,24 @@ server.port=${PORT:8080}
 
   * Remove mysql dependency and add postgresql dependency
 ```
-  	<dependency>
-		<groupId>org.postgresql</groupId>
-		<artifactId>postgresql</artifactId>
-		<scope>runtime</scope>
-	</dependency>
+<dependency>
+	<groupId>org.postgresql</groupId>
+	<artifactId>postgresql</artifactId>
+	<scope>runtime</scope>
+</dependency>
 ```
 
   * Add this plugin
 ```
-    	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-compiler-plugin</artifactId>
-		<version>3.1</version>
-		<configuration>
-			<source>1.8</source>
-			<target>1.8</target>
-		</configuration>
-	</plugin>
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-compiler-plugin</artifactId>
+	<version>3.1</version>
+	<configuration>
+		<source>1.8</source>
+		<target>1.8</target>
+	</configuration>
+</plugin>
 ```
 
 * Make sure to target the correct Java runtime environment.
