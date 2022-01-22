@@ -12,11 +12,14 @@ The following shows how to deploy a Spring Boot project with React using Postgre
 ### Set up heroku app
 * from the home page create new app 
 <img src="images/1.jpg" width="80%">
+
 * Insert app name (must be unique)
 <img src="images/2.jpg" width="80%">
+
 * Select resource then find more add-ons to add Heroku postgres
 <img src="images/3.jpg" width="80%">
 <img src="images/4.jpg" width="80%">
+
 * Open database credentials as shown bellow
 <img src="images/5.jpg" width="80%">
 <img src="images/6.jpg" width="80%">
